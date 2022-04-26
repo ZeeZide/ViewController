@@ -171,6 +171,7 @@ open class NavigationController<RootVC>: ViewController, _NavigationController
       NavigationView {
         viewController._rootViewController.contentView
           .controlled(by: viewController._rootViewController)
+          .navigationTitle(viewController._rootViewController.navigationTitle)
       }
     }
   }
