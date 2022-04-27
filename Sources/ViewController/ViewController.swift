@@ -10,7 +10,9 @@ import SwiftUI
 import Combine
 
 /**
- * A ViewController.
+ * A ``ViewController``.
+ *
+ * TODO: lotsa more documentation
  *
  * In WebObjects those would be called `WOComponent`s and are accessible
  * using the Environment (`WOContext` in WebObjects).
@@ -19,15 +21,15 @@ import Combine
  * The lifecycle events also do not reflect whether the VC is "really" on
  * screen, just whether it has been presented.
  *
- * There are two parts to presenting a ViewController:
+ * ### Custom Presentation
+ *
+ * There are two parts to presenting a ViewController in a custom way:
  * - Call `present` on the active viewController with the instance of the new,
  *   child ViewController. The active VC can be accessed using
  *   `@EnvironmentObject private var viewController : ViewController`
  *   (or the specific VC subclass)
  * - To choose the presentation style, attach it to the View, for example:
  *   `.presentInNavigation(ChildVC.self) { ChildVC.ContentView() }`
- *
- * TODO: lotsa more documentation
  */
 public protocol ViewController: _ViewController, ObservableObject, Identifiable
 {
@@ -44,9 +46,19 @@ public protocol ViewController: _ViewController, ObservableObject, Identifiable
    * E.g. there could be a different main View for macOS and for iOS.
    *
    * But having a single associated `ContentView` allows for more convenient
-   * API for that common case.
+   * APIs for that common case.
    *
-   * Example:
+   * Implicit View via `view` accessor:
+   * ```swift
+   * class Contacts: ViewController {
+   *
+   *   var view: some View {
+   *     Text("The Contacts!")
+   *   }
+   * }
+   * ```
+   *
+   * Implicit View, explicit class:
    * ```swift
    * class Contacts: ViewController {
    *
@@ -61,12 +73,13 @@ public protocol ViewController: _ViewController, ObservableObject, Identifiable
    * }
    * ```
    */
-  associatedtype ContentView : ViewControllerView = DefaultViewControllerView
+  associatedtype ContentView : SwiftUI.View = DefaultViewControllerView
   
   /**
    * Dirty trick to let the user avoid the need to explicitly specify the
    * `ViewControllerView` when declaring Views within the scope of a
    * ViewController.
+   *
    * Example:
    * ```swift
    * class Contacts: ViewController {
@@ -80,9 +93,36 @@ public protocol ViewController: _ViewController, ObservableObject, Identifiable
   typealias View = ViewControllerView
 
   /**
-   * Instantiates the ``ContentView`` associated with the ``ViewController``.
+   * Returns the ``ContentView`` associated with the ``ViewController``.
+   *
+   * One way to specify an associated ``View`` for the controller is by
+   * overriding this property, for example:
+   * ```swift
+   * class Contacts: ViewController {
+   *
+   *   var view: some View {
+   *     Text("The Contacts!")
+   *   }
+   * }
+   * ```
+   *
+   * Another way is to use a ``ViewControllerView`` (just a plain `View` w/
+   * an `init` method w/o arguments, used to instantiate the `View`):
+   * ```swift
+   * class Contacts: ViewController {
+   *
+   *   struct ContentView: View {
+   *
+   *     @EnvironmentObject var viewController: Contacts
+   *
+   *     var body: some View {
+   *        Text("The Contacts!")
+   *     }
+   *   }
+   * }
+   * ```
    */
-  var contentView : ContentView { get }
+  @ViewBuilder var view : ContentView { get }
   
   
   // MARK: - Represented Object
@@ -243,16 +283,4 @@ public protocol ViewController: _ViewController, ObservableObject, Identifiable
    * Remove the ``ViewController`` from its parent.
    */
   func removeFromParent()
-}
-
-public extension ViewController {
-  
-  @inlinable
-  var contentView : ContentView { ContentView() }
-
-  @inlinable
-  var controlledContentView : some SwiftUI.View {
-    contentView
-      .controlled(by: self)
-  }
 }

@@ -13,8 +13,6 @@ import SwiftUI
  * i.e. one which starts a new VC hierarchy.
  * Usually only one root VC is used per scene.
  *
- * Checkout the ``View/main`` modifier for the more general solution.
- *
  * E.g. this could be used in the `ContentView` of an app like this:
  * ```swift
  * struct ContentView: View {
@@ -47,7 +45,7 @@ public struct MainViewController<VC>: View where VC: ViewController {
   }
 
   public var body: some View {
-    VC.ContentView()
-      .controlled(by: viewController)
+    viewController
+      .controlledContentView
   }
 }

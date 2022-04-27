@@ -102,7 +102,15 @@ public extension _ViewController {
         // helpers.
         guard !isShowing else {
           // isShowing=true would be activation
-          logger.warning("Attempt to activate VC via Binding, won't work!")
+          if self.activePresentations.contains(where: { $0.mode == mode }) {
+            logger.debug(
+              "Attempt to activate VC via Binding, mode already active!")
+          }
+          else {
+            // FIXME: This can sometimes be seen in sheets, figure out why
+            logger.warning(
+              "Attempt to activate VC via Binding, won't work \(self)!")
+          }
           return
         }
         
@@ -279,7 +287,7 @@ public extension _ViewController {
       activePresentation.viewController.dismiss()
     }
     
-    activePresentations.append(TypedViewControllerPresentation<VC>(
+    activePresentations.append(ViewControllerPresentation(
       viewController: viewController,
       mode: mode
     ))

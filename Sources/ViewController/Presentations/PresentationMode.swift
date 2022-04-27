@@ -14,6 +14,15 @@ import SwiftUI
  * ```swift
  * public struct ContentView: View {
  *   @Environment(\.viewControllerPresentationMode) private var mode
+ *
+ *   var body: some View {
+ *     if mode == .sheet {
+ *       Text("I'm in a sheet!")
+ *     }
+ *     else {
+ *       Text("I'm in a sheet, NOT!")
+ *     }
+ *   }
  * }
  * ```
  */

@@ -16,8 +16,10 @@ public extension EnvironmentValues {
   }
 
   /**
-   * Allows access to the ``ViewController``, w/o having the View refreshed if
-   * the VC changes.
+   * Allows access to the ``ViewController``, w/o having the `View` refreshed if
+   * the ViewController changes.
+   *
+   * I.e. an "unobserved object".
    *
    * Can be used like this:
    * ```swift
@@ -75,22 +77,6 @@ public extension View {
     // Note: Also used internally during presentation.
     self
       .modifier(AutoPresentationViewModifier(viewController: viewController))
-      .modifier(ControlledViewModifier(viewController: viewController))
-  }
-}
-
-// Push the VC into the environment by three means:
-// - as an EnvironmentObject using its concrete class
-// - type-erased, as an ``AnyViewController`` EnvironmentObject
-// - as a plain `viewController` environment key (w/o state observation)
-fileprivate struct ControlledViewModifier<VC>: ViewModifier
-                     where VC: ViewController
-{
-  
-  let viewController : VC
-
-  func body(content: Content) -> some View {
-    content
       .environmentObject(viewController)
       .environmentObject(AnyViewController(viewController))
       .environment(\.viewController, viewController)

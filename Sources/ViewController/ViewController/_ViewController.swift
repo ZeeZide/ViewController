@@ -178,11 +178,6 @@ public protocol _ViewController: AnyObject, CustomStringConvertible {
   // MARK: - Type Erasure
 
   /**
-   * Returns the type erased ``ContentView`` of the ``ViewController``.
-   */
-  var anyContentView : AnyView { get }
-
-  /**
    * Returns the type erased ``ContentView`` of the ``ViewController``,
    * with the ``ViewController`` being applied as the ``controlled(by:)``
    * View.

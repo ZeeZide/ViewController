@@ -145,7 +145,7 @@ open class NavigationController<RootVC>: ViewController, _NavigationController
   
   private func markAsPresentingViewController() {
     rootViewController.presentingViewController = self
-    activePresentations.append(TypedViewControllerPresentation(
+    activePresentations.append(ViewControllerPresentation(
       viewController: _rootViewController,
       mode: .custom // not .navigation, that would activate the bg link!
     ))
@@ -161,18 +161,11 @@ open class NavigationController<RootVC>: ViewController, _NavigationController
   
   // MARK: - View
   
-  public struct ContentView: View {
-    
-    @EnvironmentObject private var viewController : NavigationController
-    
-    public init() {}
-    
-    public var body: some View {
-      NavigationView {
-        viewController._rootViewController.contentView
-          .controlled(by: viewController._rootViewController)
-          .navigationTitle(viewController._rootViewController.navigationTitle)
-      }
+  public var view: some View  {
+    NavigationView {
+      _rootViewController.view
+        .controlled(by: _rootViewController)
+        .navigationTitle(_rootViewController.navigationTitle)
     }
   }
 }

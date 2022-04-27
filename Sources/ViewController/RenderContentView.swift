@@ -9,11 +9,11 @@
 import SwiftUI
 
 /**
- * Accesses the `contentView` of the current viewController of the specific
- * class.
+ * Accesses the `view` of the current viewController of the specific
+ * ``ViewController`` class in the environment.
  *
  * User level code usually doesn't need to work with this.
- *
+ * 
  * Example:
  * ```swift
  * var body: some View {
@@ -33,16 +33,16 @@ public struct RenderContentView<VC: ViewController>: View {
 #if DEBUG
   @inlinable
   public var body: some View {
-    if viewController.contentView is EmptyView {
+    if viewController.view is EmptyView {
       Text(verbatim: "Embedding EmptyView?")
         .foregroundColor(.red)
     }
-    viewController.contentView
+    viewController.view
   }
 #else
   @inlinable
   public var body: some View {
-    viewController.contentView
+    viewController.view
   }
 #endif
 }

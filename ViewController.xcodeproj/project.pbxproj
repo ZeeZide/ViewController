@@ -17,6 +17,8 @@
 		E80050242816EE1D00E4805C /* HierarchyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80050222816EE1D00E4805C /* HierarchyView.swift */; };
 		E80050262816EE3400E4805C /* ViewControllerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80050252816EE3400E4805C /* ViewControllerInfo.swift */; };
 		E80050272816EE3400E4805C /* ViewControllerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80050252816EE3400E4805C /* ViewControllerInfo.swift */; };
+		E8283B432819629E00467F10 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8283B422819629E00467F10 /* ContentView.swift */; };
+		E8283B442819629E00467F10 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8283B422819629E00467F10 /* ContentView.swift */; };
 		E836E5A0280EEA870001B85E /* PushPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836E59F280EEA870001B85E /* PushPresentation.swift */; };
 		E836E5A1280EEA870001B85E /* PushPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836E59F280EEA870001B85E /* PushPresentation.swift */; };
 		E836E5A3280EEACA0001B85E /* SheetPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836E5A2280EEACA0001B85E /* SheetPresentation.swift */; };
@@ -73,6 +75,7 @@
 		E800501F2816C40600E4805C /* AutoPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoPresentation.swift; sourceTree = "<group>"; };
 		E80050222816EE1D00E4805C /* HierarchyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HierarchyView.swift; sourceTree = "<group>"; };
 		E80050252816EE3400E4805C /* ViewControllerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerInfo.swift; sourceTree = "<group>"; };
+		E8283B422819629E00467F10 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E836E59E280EEA0A0001B85E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E836E59F280EEA870001B85E /* PushPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushPresentation.swift; sourceTree = "<group>"; };
 		E836E5A2280EEACA0001B85E /* SheetPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetPresentation.swift; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 				E88DCE852812DF8200CD5203 /* RepresentedObject.swift */,
 				E83ADA652814267600D98D82 /* Containment.swift */,
 				E8FC0F11281848880051E640 /* TypeErasure.swift */,
+				E8283B422819629E00467F10 /* ContentView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -368,6 +372,7 @@
 				E88DCE7D2812D3A300CD5203 /* ViewControllerStorage.swift in Sources */,
 				E8E7066F27F2014F00F50160 /* PresentationMode.swift in Sources */,
 				E88DCE9B28130B8300CD5203 /* RenderContentView.swift in Sources */,
+				E8283B432819629E00467F10 /* ContentView.swift in Sources */,
 				E88DCE922812FA7A00CD5203 /* _ViewController.swift in Sources */,
 				E836E5AD280EECD50001B85E /* PushLink.swift in Sources */,
 				E88DCE732812CEE700CD5203 /* ViewController.swift in Sources */,
@@ -404,6 +409,7 @@
 				E88DCE7E2812D3A300CD5203 /* ViewControllerStorage.swift in Sources */,
 				E8E7067027F2014F00F50160 /* PresentationMode.swift in Sources */,
 				E88DCE9C28130B8300CD5203 /* RenderContentView.swift in Sources */,
+				E8283B442819629E00467F10 /* ContentView.swift in Sources */,
 				E88DCE932812FA7A00CD5203 /* _ViewController.swift in Sources */,
 				E836E5AE280EECD50001B85E /* PushLink.swift in Sources */,
 				E88DCE742812CEE700CD5203 /* ViewController.swift in Sources */,

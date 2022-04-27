@@ -10,9 +10,6 @@ import SwiftUI
 public extension ViewController {
   
   @inlinable
-  var anyContentView           : AnyView { AnyView(contentView) }
-
-  @inlinable
   var anyControlledContentView : AnyView { AnyView(controlledContentView) }
 
   @inlinable
