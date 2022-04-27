@@ -47,7 +47,7 @@ public struct MainViewController<VC>: View where VC: ViewController {
   }
 
   public var body: some View {
-    VC.ContentView()
-      .controlled(by: viewController)
+    viewController
+      .controlledContentView
   }
 }

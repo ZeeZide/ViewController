@@ -61,7 +61,7 @@ public protocol ViewController: _ViewController, ObservableObject, Identifiable
    * }
    * ```
    */
-  associatedtype ContentView : ViewControllerView = DefaultViewControllerView
+  associatedtype ContentView : SwiftUI.View = DefaultViewControllerView
   
   /**
    * Dirty trick to let the user avoid the need to explicitly specify the
@@ -82,7 +82,7 @@ public protocol ViewController: _ViewController, ObservableObject, Identifiable
   /**
    * Instantiates the ``ContentView`` associated with the ``ViewController``.
    */
-  var contentView : ContentView { get }
+  @ViewBuilder var contentView : ContentView { get }
   
   
   // MARK: - Represented Object
@@ -245,11 +245,13 @@ public protocol ViewController: _ViewController, ObservableObject, Identifiable
   func removeFromParent()
 }
 
-public extension ViewController {
+public extension ViewController where ContentView: ViewControllerView {
   
   @inlinable
-  var contentView : ContentView { ContentView() }
+  @ViewBuilder var contentView : ContentView { ContentView() }
+}
 
+public extension ViewController {
   @inlinable
   var controlledContentView : some SwiftUI.View {
     contentView

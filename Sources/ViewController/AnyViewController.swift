@@ -70,7 +70,8 @@ public final class AnyViewController: ViewController {
   // Those are typed erased by the base protocol already (_ViewController).
   
   @inlinable
-  public var contentView           : AnyView { anyContentView }
+  @ViewBuilder public var contentView : AnyView { anyContentView }
+  
   @inlinable
   public var anyContentView        : AnyView { viewController.anyContentView }
   @inlinable

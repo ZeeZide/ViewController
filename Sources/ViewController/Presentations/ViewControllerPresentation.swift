@@ -42,12 +42,7 @@ public struct TypedViewControllerPresentation<VC: ViewController>
   init(viewController: VC, mode: ViewControllerPresentationMode) {
     self.viewController = viewController
     self.mode           = mode
-    self.contentView = {
-      AnyView(
-        viewController.contentView
-          .controlled(by: viewController)
-      )
-    }
+    self.contentView    = { viewController.anyControlledContentView }
   }
 }
 
