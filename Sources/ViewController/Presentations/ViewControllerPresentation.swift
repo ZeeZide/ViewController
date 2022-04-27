@@ -16,33 +16,16 @@ import Foundation
  *
  * Note that a controller may hold multiple presentations, e.g. it may present
  * a detail in a `NavigationView` while also doing a presentation in a sheet.
- *
- * This is the type erased version, ``TypedViewControllerPresentation`` is
- * created internally.
  */
-public protocol ViewControllerPresentation {
-  
-  var viewController : _ViewController                { get }
-  var mode           : ViewControllerPresentationMode { get }
-  
-  var contentView    : () -> AnyView { get }
-}
-
-/**
- * The concrete ``ViewControllerPresentation`` object used internally.
- */
-public struct TypedViewControllerPresentation<VC: ViewController>
-              : ViewControllerPresentation
-{
+public struct ViewControllerPresentation {
   
   public let viewController : _ViewController
   public let mode           : ViewControllerPresentationMode
-  public let contentView    : () -> AnyView
-  
-  init(viewController: VC, mode: ViewControllerPresentationMode) {
+
+  init<VC>(viewController: VC, mode: ViewControllerPresentationMode)
+    where VC: ViewController
+  {
     self.viewController = viewController
     self.mode           = mode
-    self.contentView    = { viewController.anyControlledContentView }
   }
 }
-

@@ -145,7 +145,7 @@ open class NavigationController<RootVC>: ViewController, _NavigationController
   
   private func markAsPresentingViewController() {
     rootViewController.presentingViewController = self
-    activePresentations.append(TypedViewControllerPresentation(
+    activePresentations.append(ViewControllerPresentation(
       viewController: _rootViewController,
       mode: .custom // not .navigation, that would activate the bg link!
     ))

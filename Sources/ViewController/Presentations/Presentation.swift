@@ -287,7 +287,7 @@ public extension _ViewController {
       activePresentation.viewController.dismiss()
     }
     
-    activePresentations.append(TypedViewControllerPresentation<VC>(
+    activePresentations.append(ViewControllerPresentation(
       viewController: viewController,
       mode: mode
     ))
