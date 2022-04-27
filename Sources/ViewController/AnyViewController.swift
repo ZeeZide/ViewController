@@ -34,17 +34,20 @@ import SwiftUI
  */
 public final class AnyViewController: ViewController {
   
-  public  var id : ObjectIdentifier { ObjectIdentifier(viewController) }
+  public   var id : ObjectIdentifier { ObjectIdentifier(viewController) }
     
-  public  let viewController : _ViewController
-  private var subscription   : AnyCancellable?
+  public   let viewController : _ViewController
+  private  var subscription   : AnyCancellable?
   
   @usableFromInline
-  init<VC>(_ viewController: VC) where VC: ViewController {
+  internal let contentView    : () -> AnyView
+  
+  public init<VC>(_ viewController: VC) where VC: ViewController {
     assert(!(viewController is AnyViewController),
            "Attempt to nest an AnyVC into another \(viewController)")
     
     self.viewController = viewController
+    self.contentView    = { AnyView(viewController.view) }
     
     subscription = viewController.objectWillChange.sink { [weak self] _ in
       self?.objectWillChange.send()
@@ -54,9 +57,9 @@ public final class AnyViewController: ViewController {
   /**
    * An initializer that avoids nesting `AnyViewController`s into themselves.
    */
-  @usableFromInline
   init(_ viewController: AnyViewController) {
     self.viewController = viewController.viewController
+    self.contentView    = viewController.contentView
     
     // TBD: Can't unwrap this?
     subscription = viewController.objectWillChange.sink {
@@ -70,10 +73,8 @@ public final class AnyViewController: ViewController {
   // Those are typed erased by the base protocol already (_ViewController).
   
   @inlinable
-  @ViewBuilder public var view : AnyView { anyContentView }
+  @ViewBuilder public var view : AnyView { contentView() }
   
-  @inlinable
-  public var anyContentView        : AnyView { viewController.anyContentView }
   @inlinable
   public var controlledContentView : AnyView { anyControlledContentView }
   @inlinable
