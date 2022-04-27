@@ -23,16 +23,13 @@ More details will be posted but to get started.
 
   class HomePage: ViewController {
     
-    struct ContentView: View {
-      
-      var body: some View {
-        VStack {
-          Text("Welcome to MWC!")
-            .font(.title)
-            .padding()
-          
-          Spacer()
-        }
+    var view: some View {
+      VStack {
+        Text("Welcome to MWC!")
+          .font(.title)
+          .padding()
+        
+        Spacer()
       }
     }
   }
@@ -58,16 +55,13 @@ More details will be posted but to get started.
 
   class Settings: ViewController {
     
-    struct ContentView: View {
-      
-      var body: some View {
-        VStack {
-          Text("Welcome to Settings!")
-            .font(.title)
-            .padding()
-          
-          Spacer()
-        }
+    var view: some View { // the View being controlled
+      VStack {
+        Text("Welcome to Settings!")
+          .font(.title)
+          .padding()
+        
+        Spacer()
       }
     }
   }
@@ -82,24 +76,19 @@ More details will be posted but to get started.
       show(Settings()) // or `present(Settings())`
     }
     
-    struct ContentView: View {
-    
-      @EnvironmentObject private var viewController : HomePage
-      
-      var body: some View {
-        VStack {
-          Text("Welcome to MWC!")
-            .font(.title)
-            .padding()
-            
-          Divider()
+    var view: some View {
+      VStack {
+        Text("Welcome to MWC!")
+          .font(.title)
+          .padding()
           
-          Button(action: viewController.configureApp) {
-            Label("Configure", systemImage: "gear")
-          }
-          
-          Spacer()
+        Divider()
+        
+        Button(action: self.configureApp) {
+          Label("Configure", systemImage: "gear")
         }
+        
+        Spacer()
       }
     }
   }
@@ -144,20 +133,17 @@ inline a `NavigationLink`, use `PushLink`, which wraps that.
 
   class HomePage: ViewController {
     
-    struct ContentView: View {
-      
-      var body: some View {
-        VStack {
-          Text("Welcome to MWC!")
-            .font(.title)
-            .padding()
-            
-          Divider()
+    var view: some View {
+      VStack {
+        Text("Welcome to MWC!")
+          .font(.title)
+          .padding()
           
-          PushLink("Open Settings", to: Settings())
-          
-          Spacer()
-        }
+        Divider()
+        
+        PushLink("Open Settings", to: Settings())
+        
+        Spacer()
       }
     }
   }

@@ -19,8 +19,8 @@ import SwiftUI
  *
  * Content View Example:
  * ```swift
- * struct ContentView: View {
- *   var body: some View {
+ * class HomePage: ViewController {
+ *   var view: some View {
  *     PushLink("Preferences…", to: PreferencesPage())
  *   }
  * }
@@ -28,8 +28,8 @@ import SwiftUI
  *
  * Explicit View Example:
  * ```swift
- * struct ContentView: View {
- *   var body: some View {
+ * class HomePage: ViewController {
+ *   var view: some View {
  *     PushLink(to: PreferencesPage(), using: Text("Prefs!") {
  *       Text("Preferences…")
  *     }
@@ -200,7 +200,7 @@ public struct PushLink<VC, CV, Label>: View
 extension PushLink {
 
   /**
-   * Create a ``PushLink`` that is using the ``ViewController/ContentView``
+   * Create a ``PushLink`` that is using the ``ViewController/view``
    * as the destination.
    *
    * Example:
@@ -221,7 +221,7 @@ extension PushLink {
   }
 
   /**
-   * Create a ``PushLink`` that is using the ``ViewController/ContentView``
+   * Create a ``PushLink`` that is using the ``ViewController/view``
    * as the destination.
    *
    * Example:

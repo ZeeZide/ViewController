@@ -9,6 +9,13 @@ import SwiftUI
 
 public extension ViewController where ContentView: ViewControllerView {
   
+  /**
+   * The default implementation of the user's ``ViewController`` doesn't
+   * implement the ``ViewController/view`` method,
+   * but _does_ have an associated ``View/ContentView`` specified. In this case
+   * the `ContentView` needs to be a ``ViewControllerView`` (which just adds
+   * the empty `init` to `View`).
+   */
   @inlinable
   @ViewBuilder var view : ContentView { ContentView() }
 }
