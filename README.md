@@ -1,7 +1,5 @@
 ![ViewController](https://user-images.githubusercontent.com/7712892/165515717-acc14f68-f464-48f7-b595-638f385c659f.svg)
 
-# ViewController
-
 ViewController's for SwiftUI.
 
 WIP.
