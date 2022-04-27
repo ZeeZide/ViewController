@@ -82,7 +82,7 @@ public protocol ViewController: _ViewController, ObservableObject, Identifiable
   /**
    * Instantiates the ``ContentView`` associated with the ``ViewController``.
    */
-  @ViewBuilder var contentView : ContentView { get }
+  @ViewBuilder var view : ContentView { get }
   
   
   // MARK: - Represented Object
@@ -248,13 +248,13 @@ public protocol ViewController: _ViewController, ObservableObject, Identifiable
 public extension ViewController where ContentView: ViewControllerView {
   
   @inlinable
-  @ViewBuilder var contentView : ContentView { ContentView() }
+  @ViewBuilder var view : ContentView { ContentView() }
 }
 
 public extension ViewController {
   @inlinable
   var controlledContentView : some SwiftUI.View {
-    contentView
+    view
       .controlled(by: self)
   }
 }

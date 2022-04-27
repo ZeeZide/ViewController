@@ -169,7 +169,7 @@ open class NavigationController<RootVC>: ViewController, _NavigationController
     
     public var body: some View {
       NavigationView {
-        viewController._rootViewController.contentView
+        viewController._rootViewController.view
           .controlled(by: viewController._rootViewController)
           .navigationTitle(viewController._rootViewController.navigationTitle)
       }
