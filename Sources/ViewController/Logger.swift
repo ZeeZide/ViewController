@@ -1,0 +1,49 @@
+//
+//  Logger.swift
+//  ViewController
+//
+//  Created by Helge Heß.
+//  Copyright © 2022 ZeeZide GmbH. All rights reserved.
+//
+
+import os
+
+// Print Log Helper, since we apparently can't set the log level of os_log 🤦‍♀️
+
+#if DEBUG && true
+
+@usableFromInline
+struct PrintLogger {
+
+  let level : OSLogType = .error // TODO: derive from LOGLEVEL env variable
+  
+  func log(_ level: OSLogType, _ prefix: String, _ message: () -> String) {
+    guard level.rawValue >= self.level.rawValue else { return }
+    print(prefix + message())
+  }
+  
+  @usableFromInline
+  func debug(_ message: @autoclosure () -> String) {
+    log(.debug, "", message)
+  }
+  @usableFromInline
+  func warning(_ message: @autoclosure () -> String) {
+    log(.error, "WARN: ", message)
+  }
+  @usableFromInline
+  func error(_ message: @autoclosure () -> String) {
+    log(.error, "ERROR: ", message)
+  }
+}
+
+@usableFromInline
+let logger = PrintLogger()
+
+#else
+
+@usableFromInline
+let logger = Logger(
+  subsystem : Bundle.main.bundleIdentifier ?? "Main",
+  category  : "VC"
+)
+#endif
