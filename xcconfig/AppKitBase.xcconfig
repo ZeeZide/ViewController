@@ -1,0 +1,7 @@
+// Base config file for Mac projects
+
+#include "Base.xcconfig"
+
+MACOSX_DEPLOYMENT_TARGET = 11
+SDKROOT                  = macosx
+

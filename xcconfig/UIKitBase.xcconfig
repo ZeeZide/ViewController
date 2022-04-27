@@ -1,0 +1,6 @@
+// Base config for Phone projects
+
+#include "Base.xcconfig"
+
+IPHONEOS_DEPLOYMENT_TARGET = 14.0
+SDKROOT                    = iphoneos
