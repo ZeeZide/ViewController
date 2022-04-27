@@ -244,17 +244,3 @@ public protocol ViewController: _ViewController, ObservableObject, Identifiable
    */
   func removeFromParent()
 }
-
-public extension ViewController where ContentView: ViewControllerView {
-  
-  @inlinable
-  @ViewBuilder var view : ContentView { ContentView() }
-}
-
-public extension ViewController {
-  @inlinable
-  var controlledContentView : some SwiftUI.View {
-    view
-      .controlled(by: self)
-  }
-}

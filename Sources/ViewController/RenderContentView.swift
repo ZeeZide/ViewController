@@ -9,10 +9,11 @@
 import SwiftUI
 
 /**
- * Accesses the `view` of the current viewController of the specific class.
+ * Accesses the `view` of the current viewController of the specific
+ * ``ViewController`` class in the environment.
  *
  * User level code usually doesn't need to work with this.
- *
+ * 
  * Example:
  * ```swift
  * var body: some View {

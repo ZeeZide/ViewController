@@ -18,6 +18,28 @@ import SwiftUI
 struct AutoPresentationViewModifier<VC>: ViewModifier where VC: ViewController {
   
   @ObservedObject var viewController : VC
+  
+  fileprivate struct Present: View {
+    
+    @ObservedObject var presentingViewController : VC
+    let mode : ViewControllerPresentationMode
+    
+    var body: some View {
+      if let presentation =
+          presentingViewController.activePresentation(for: mode)
+      {
+        let presentedViewController = presentation.viewController
+        presentedViewController.anyControlledContentView
+          .environment(\.viewControllerPresentationMode, mode)
+          .navigationTitle(presentedViewController.navigationTitle)
+      }
+      else {
+        TypeMismatchInfoView<AnyViewController, VC>(
+          parent: presentingViewController, expectedMode: mode
+        )
+      }
+    }
+  }
 
   func body(content: Content) -> some View {
     // Note: Also used internally during presentation.
@@ -27,34 +49,14 @@ struct AutoPresentationViewModifier<VC>: ViewModifier where VC: ViewController {
       .sheet(
         isPresented: viewController.isPresentingMode(.sheet),
         content: {
-          if let presentation = viewController.activePresentation(for: .sheet) {
-            presentation.contentView()
-              .environment(\.viewControllerPresentationMode, .sheet)
-              .navigationTitle(presentation.viewController.navigationTitle)
-          }
-          else {
-            TypeMismatchInfoView<AnyViewController, VC>(
-              parent: viewController, expectedMode: .sheet
-            )
-          }
+          Present(presentingViewController: viewController, mode: .sheet)
         }
       )
       .background(
         NavigationLink(
           isActive: viewController.isPresentingMode(.navigation),
           destination: {
-            if let presentation = viewController
-                      .activePresentation(for: .navigation)
-            {
-              presentation.contentView()
-                .environment(\.viewControllerPresentationMode, .navigation)
-                .navigationTitle(presentation.viewController.navigationTitle)
-            }
-            else {
-              TypeMismatchInfoView<AnyViewController, VC>(
-                parent: viewController, expectedMode: .navigation
-              )
-            }
+            Present(presentingViewController: viewController, mode: .navigation)
           },
           label: { Color.clear } // TBD: EmptyView?
         )
