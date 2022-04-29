@@ -10,7 +10,7 @@ Blog entry explaining all the things:
 
 ## Quick: How to Use
 
-Just the basic to get started quickly.
+Just the basics to get started quickly.
 
 ### Step A: Setup Project and Root VC
 
