@@ -2,15 +2,15 @@
 
 ViewController's for SwiftUI.
 
-WIP.
-
 The core idea is that the `ViewController` is owning, or at least driving,
 the View(s). Not the other way around.
 
+Blog entry explaining all the things:
+[Model View Controller for SwiftUI](http://www.alwaysrightinstitute.com/viewcontroller/)
 
-## How to Use
+## Quick: How to Use
 
-More details will be posted but to get started.
+Just the basic to get started quickly.
 
 ### Step A: Setup Project and Root VC
 
