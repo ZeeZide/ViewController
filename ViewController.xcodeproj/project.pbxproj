@@ -19,10 +19,6 @@
 		E80050272816EE3400E4805C /* ViewControllerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80050252816EE3400E4805C /* ViewControllerInfo.swift */; };
 		E8283B432819629E00467F10 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8283B422819629E00467F10 /* ContentView.swift */; };
 		E8283B442819629E00467F10 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8283B422819629E00467F10 /* ContentView.swift */; };
-		E836E5A0280EEA870001B85E /* PushPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836E59F280EEA870001B85E /* PushPresentation.swift */; };
-		E836E5A1280EEA870001B85E /* PushPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836E59F280EEA870001B85E /* PushPresentation.swift */; };
-		E836E5A3280EEACA0001B85E /* SheetPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836E5A2280EEACA0001B85E /* SheetPresentation.swift */; };
-		E836E5A4280EEACA0001B85E /* SheetPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836E5A2280EEACA0001B85E /* SheetPresentation.swift */; };
 		E836E5AD280EECD50001B85E /* PushLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836E5AC280EECD50001B85E /* PushLink.swift */; };
 		E836E5AE280EECD50001B85E /* PushLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836E5AC280EECD50001B85E /* PushLink.swift */; };
 		E83ADA662814267600D98D82 /* Containment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83ADA652814267600D98D82 /* Containment.swift */; };
@@ -77,8 +73,6 @@
 		E80050252816EE3400E4805C /* ViewControllerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerInfo.swift; sourceTree = "<group>"; };
 		E8283B422819629E00467F10 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E836E59E280EEA0A0001B85E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		E836E59F280EEA870001B85E /* PushPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushPresentation.swift; sourceTree = "<group>"; };
-		E836E5A2280EEACA0001B85E /* SheetPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetPresentation.swift; sourceTree = "<group>"; };
 		E836E5AC280EECD50001B85E /* PushLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushLink.swift; sourceTree = "<group>"; };
 		E83ADA652814267600D98D82 /* Containment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Containment.swift; sourceTree = "<group>"; };
 		E83ADA77281444B000D98D82 /* TypeMismatchInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeMismatchInfoView.swift; sourceTree = "<group>"; };
@@ -150,8 +144,6 @@
 				E8BA6EBE2815914F00FA6C5C /* ViewControllerPresentation.swift */,
 				E8E7066827F2014F00F50160 /* PresentationMode.swift */,
 				E800501F2816C40600E4805C /* AutoPresentation.swift */,
-				E836E59F280EEA870001B85E /* PushPresentation.swift */,
-				E836E5A2280EEACA0001B85E /* SheetPresentation.swift */,
 			);
 			path = Presentations;
 			sourceTree = "<group>";
@@ -354,7 +346,6 @@
 				E88DCE802812D6A700CD5203 /* Subscriptions.swift in Sources */,
 				E8BA6EBF2815914F00FA6C5C /* ViewControllerPresentation.swift in Sources */,
 				E88DCE702812C83C00CD5203 /* ReExports.swift in Sources */,
-				E836E5A3280EEACA0001B85E /* SheetPresentation.swift in Sources */,
 				E83ADA662814267600D98D82 /* Containment.swift in Sources */,
 				E800501D2816B09A00E4805C /* DebugOverlay.swift in Sources */,
 				E83ADA78281444B000D98D82 /* TypeMismatchInfoView.swift in Sources */,
@@ -366,7 +357,6 @@
 				E88DCE862812DF8200CD5203 /* RepresentedObject.swift in Sources */,
 				E88DCE832812DD8B00CD5203 /* Title.swift in Sources */,
 				E80050202816C40600E4805C /* AutoPresentation.swift in Sources */,
-				E836E5A0280EEA870001B85E /* PushPresentation.swift in Sources */,
 				E800501A2816B00E00E4805C /* DebugMode.swift in Sources */,
 				E88DCE892812E9CD00CD5203 /* Presentation.swift in Sources */,
 				E88DCE7D2812D3A300CD5203 /* ViewControllerStorage.swift in Sources */,
@@ -391,7 +381,6 @@
 				E88DCE812812D6A700CD5203 /* Subscriptions.swift in Sources */,
 				E8BA6EC02815914F00FA6C5C /* ViewControllerPresentation.swift in Sources */,
 				E88DCE712812C83C00CD5203 /* ReExports.swift in Sources */,
-				E836E5A4280EEACA0001B85E /* SheetPresentation.swift in Sources */,
 				E83ADA672814267600D98D82 /* Containment.swift in Sources */,
 				E800501E2816B09A00E4805C /* DebugOverlay.swift in Sources */,
 				E83ADA79281444B000D98D82 /* TypeMismatchInfoView.swift in Sources */,
@@ -403,7 +392,6 @@
 				E88DCE872812DF8200CD5203 /* RepresentedObject.swift in Sources */,
 				E88DCE842812DD8B00CD5203 /* Title.swift in Sources */,
 				E80050212816C40600E4805C /* AutoPresentation.swift in Sources */,
-				E836E5A1280EEA870001B85E /* PushPresentation.swift in Sources */,
 				E800501B2816B00E00E4805C /* DebugMode.swift in Sources */,
 				E88DCE8A2812E9CD00CD5203 /* Presentation.swift in Sources */,
 				E88DCE7E2812D3A300CD5203 /* ViewControllerStorage.swift in Sources */,
