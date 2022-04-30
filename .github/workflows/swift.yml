@@ -26,19 +26,6 @@ jobs:
       - name: Select latest available Xcode
         uses: maxim-lobanov/setup-xcode@v1.2.1
         with:
-          xcode-version: 12.4
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Prerequisites
-        run: gem install xcpretty
-      - name: Build
-        run: set -o pipefail; xcodebuild -scheme ViewController-iOS build | xcpretty --color
-  iOS15:
-    runs-on: macos-latest
-    steps:
-      - name: Select latest available Xcode
-        uses: maxim-lobanov/setup-xcode@v1.2.1
-        with:
           xcode-version: 13.2
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -52,7 +39,7 @@ jobs:
       - name: Select latest available Xcode
         uses: maxim-lobanov/setup-xcode@v1.2.1
         with:
-          xcode-version: 12.4
+          xcode-version: 13.2
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Prerequisites
