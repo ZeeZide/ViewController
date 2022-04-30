@@ -171,16 +171,29 @@ public struct PushLink<VC, CV, Label>: View
   }
   
   @ViewBuilder private var destination: some View {
-    if let presentedVC = parentViewController
-             .presentedViewController(of: VC.self, mode: mode)
-    {
-      contentView
-        .controlled(by: presentedVC)
-        .environment(\.viewControllerPresentationMode, .navigation)
-        .navigationTitle(presentedVC.navigationTitle)
+    if let activeVC = childViewController {
+      if let presentedVC  = activeVC as? VC {
+        if let presentation =
+                 parentViewController.activePresentation(for: presentedVC),
+           presentation.mode == mode
+        {
+          contentView
+            .controlled(by: presentedVC)
+            .environment(\.viewControllerPresentationMode, .navigation)
+            .navigationTitle(presentedVC.navigationTitle)
+        }
+        else {
+          SwiftUI.Label("Error: The linked VC is not being presented as a link",
+                        systemImage: "exclamationmark.triangle")
+        }
+      }
+      else {
+        SwiftUI.Label("Error: The linked VC has an unexpected type!",
+                      systemImage: "exclamationmark.triangle")
+      }
     }
     else {
-      SwiftUI.Label("Error: Missing/wrong presented VC",
+      SwiftUI.Label("Linked VC is not yet being presented.",
                     systemImage: "exclamationmark.triangle")
     }
   }
