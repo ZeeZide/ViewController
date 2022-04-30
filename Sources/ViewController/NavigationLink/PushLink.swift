@@ -158,6 +158,28 @@ public struct PushLink<VC, CV, Label>: View
     logger.debug("PushLink[dismiss]: done: \(activeVC.description)")
   }
   
+  /**
+   * Returns a `Binding<Bool>` that handles presentation and dismiss of an
+   * associated ``ViewController``.
+   *
+   * That is:
+   * - It returns `true` if the link has an associated ``ViewController``
+   *   that is being presented.
+   * - If it is set to `true`:
+   *   - If a ``ViewController`` is already presented by this link, it stays
+   *     presented.
+   *   - If no ``ViewController`` is being presented yet, this will construct
+   *     and present a new associated ``ViewController``
+   *  - If it is set to `false` (i.e. the user navigated away from the
+   *    destination), the link's ViewController gets dismissed.
+   *
+   * Note: When switching between two `NavigationLink`s, SwiftUI can set the
+   *       Binding for the new controller to `true`, before the Binding of the
+   *       old controller was set to `false`. PushLink deals w/ that and
+   *       dismisses old VCs before presenting a new.
+   *
+   * - Returns: A Binding that controls whether the PushLink is active.
+   */
   private var isActiveBinding: Binding<Bool> {
     Binding(
       get: {
@@ -170,6 +192,14 @@ public struct PushLink<VC, CV, Label>: View
     )
   }
   
+  /**
+   * Returns a View representing the destination of the `NavigationLink`.
+   *
+   * Which is usually going to be the `contentView` of the destination
+   * ``ViewController``, bound to the same.
+   * This also pushes the ``ViewController/navigationTitle`` to the
+   * SwiftUI environment.
+   */
   @ViewBuilder private var destination: some View {
     if let activeVC = childViewController {
       if let presentedVC  = activeVC as? VC {

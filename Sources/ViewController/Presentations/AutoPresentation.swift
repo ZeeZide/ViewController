@@ -15,7 +15,9 @@ import SwiftUI
  * It watches the current VC to detect presentation changes,
  * and binds the sheet/navlink to the respective mode.
  */
-struct AutoPresentationViewModifier<VC>: ViewModifier where VC: ViewController {
+internal struct AutoPresentationViewModifier<VC>: ViewModifier
+                  where VC: ViewController
+{
   
   @ObservedObject var viewController : VC
   

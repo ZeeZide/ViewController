@@ -30,14 +30,16 @@ public enum ViewControllerPresentationMode: Hashable {
   // FIXME: Used in two different ways, for accessing the actual presentation,
   //        and for deciding what presentation to use.
   
-  /// The ``ViewController`` will decide on an appropriate presentation mode.
+  /**
+   * The ``ViewController`` will decide on an appropriate presentation mode.
+   */
   case automatic
   
   /**
    * The ``ViewController`` won't do the presentation automagically,
-   * the user needs to handle the presentation explicitly.
-   * E.g. using `presentAsSheet()` or `presentInNavigation()`, or in a
-   * completely manual way.
+   * the user needs to handle it explicitly
+   * (e.g. using the `.sheet` modifier or a programmatic `NavigationLink` with
+   *  the `isActive` bound to the `presentedViewController`).
    */
   case custom
   

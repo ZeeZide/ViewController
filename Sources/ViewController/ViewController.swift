@@ -212,11 +212,47 @@ public protocol ViewController: _ViewController, ObservableObject, Identifiable
   func present<VC: ViewController>(_ viewController: VC)
          where VC.ContentView == DefaultViewControllerView
 
+  /**
+   * Present the ``ViewController`` in a context aware mode.
+   * E.g. if it is within a ``NavigationController``, it'll get presented as
+   * a navigation.
+   * By default ``ViewController``s are presented as sheets.
+   *
+   * - Parameter viewController: The ``ViewController`` to present.
+   */
   func show<VC: ViewController>(_ viewController: VC)
+  /**
+   * Present a ``ViewController`` that doesn't specify an explicit
+   * ``ViewController/ContentView`` type (i.e. doesn't implement `view` or
+   * typealias/nest a `ContentView` type).
+   * Unless specified otherwise in the presentationMode, this will end up in
+   * a ``ViewControllerPresentationMode/custom`` (i.e. the user has to deal
+   * with the presentation himself).
+   *
+   * - Parameter viewController: The ``ViewController`` to present.
+   */
   func show<VC: ViewController>(_ viewController: VC)
          where VC.ContentView == DefaultViewControllerView
   
+  /**
+   * Present the ``ViewController`` in a context aware, "detail", mode.
+   *
+   * If the container ViewController doesn't support an explicit "detail" mode,
+   * this acts like ``ViewController/show``.
+   *
+   * - Parameter viewController: The ``ViewController`` to present.
+   */
   func showDetail<VC: ViewController>(_ viewController: VC)
+  /**
+   * Present a ``ViewController`` that doesn't specify an explicit
+   * ``ViewController/ContentView`` type (i.e. doesn't implement `view` or
+   * typealias/nest a `ContentView` type).
+   * Unless specified otherwise in the presentationMode, this will end up in
+   * a ``ViewControllerPresentationMode/custom`` (i.e. the user has to deal
+   * with the presentation himself).
+   *
+   * - Parameter viewController: The ``ViewController`` to present.
+   */
   func showDetail<VC: ViewController>(_ viewController: VC)
          where VC.ContentView == DefaultViewControllerView
 
