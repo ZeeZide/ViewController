@@ -44,6 +44,7 @@ struct ViewControllerInfo: View {
     let toRoot = sequence(first: viewController) {
       $0.presentingViewController
     }
+    .reversed()
     if let presented = viewController.presentedViewController {
       let downwards = sequence(first: presented) {
         $0.presentedViewController
