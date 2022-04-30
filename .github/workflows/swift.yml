@@ -7,7 +7,7 @@ on:
     - cron: "0 9 * * 1"
 
 jobs:
-  nextstep:
+  SwiftPackage:
     runs-on: macos-latest
     steps:
       - name: Select latest available Xcode
@@ -20,3 +20,29 @@ jobs:
         run: swift build -c debug
       - name: Build Swift Release Package
         run: swift build -c release
+  iOS:
+    runs-on: macos-latest
+    steps:
+      - name: Select latest available Xcode
+        uses: maxim-lobanov/setup-xcode@v1.2.1
+        with:
+          xcode-version: 13.2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Prerequisites
+        run: gem install xcpretty
+      - name: Build
+        run: set -o pipefail; xcodebuild -scheme ViewController-iOS build | xcpretty --color
+  NeXTstep:
+    runs-on: macos-latest
+    steps:
+      - name: Select latest available Xcode
+        uses: maxim-lobanov/setup-xcode@v1.2.1
+        with:
+          xcode-version: 13.2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Prerequisites
+        run: gem install xcpretty
+      - name: Build
+        run: set -o pipefail; xcodebuild -scheme ViewController-macOS build | xcpretty --color

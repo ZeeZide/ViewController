@@ -23,21 +23,72 @@ public extension ViewController {
   }
 }
 
+
+// MARK: - Lookup Presentations
 public extension _ViewController {
-  
+
+  /**
+   * Returns the active ``ViewControllerPresentation`` for a given
+   * ``ViewController/PresentationMode`` (or the first, if no mode
+   * is specified.
+   *
+   * - Parameter mode: An optional presentation mode that has to match.
+   * - Returns: An active presentation for the mode, if there is one.
+   *            Or the first active presentation if `mode` is `nil`.
+   */
+  @inlinable
   func activePresentation(for mode: PresentationMode?)
        -> ViewControllerPresentation?
   {
     guard let mode = mode else { return activePresentations.first }
     return activePresentations.first(where: { $0.mode == mode })
   }
+  
+  /**
+   * Returns the active ``ViewControllerPresentation`` for a specific
+   * ``ViewController`` object.
+   *
+   * - Parameter presentedViewController: The ``ViewController`` to check for.
+   * - Returns: A presentation for the ``ViewController``, if it is indeed
+   *            being presented.
+   */
+  @inlinable
   func activePresentation(for presentedViewController: _ViewController)
        -> ViewControllerPresentation?
   {
     activePresentations.first { $0.viewController === presentedViewController }
   }
 
-  // MARK: - Bindings
+  /**
+   * Lookup a presented ``ViewController`` of a particular type. Returns nil
+   * if there is none such (or the mode doesn't match).
+   *
+   * Example:
+   * ```swift
+   * let settingsVC = presentedViewController(Settings.self)
+   * ```
+   *
+   * - Parameters:
+   *   - type: The type of the ViewController to lookup
+   *   - mode: Optionally the mode the viewcontroller is presented in
+   *           (e.g. `sheet`, `navigation` or `custom`)
+   * - Returns: A ``ViewController`` of the specified type, if one exists.
+   */
+  @inlinable
+  func presentedViewController<VC>(_ type: VC.Type,
+                                   mode: ViewControllerPresentationMode?)
+       -> VC?
+    where VC: ViewController
+  {
+    guard let presentation = activePresentation(for: mode) else { return nil }
+    if let mode = mode, mode != presentation.mode    { return nil }
+    return presentation.viewController as? VC
+  }
+}
+
+
+// MARK: - Bindings
+public extension _ViewController {
   
   /**
    * This allows us to check whether a particular VC is being presented,
@@ -83,8 +134,17 @@ public extension _ViewController {
   }
 
   /**
-   * Only checks whether a specific mode is active. This is used for the
-   * internally supported "auto" modes (`.sheet` and `.navigation`).
+   * A Binding that represents whether a presentation in a particular mode is
+   * active (e.g. `sheet`, `navigation` or `custom`).
+   *
+   * Used for the internally supported "auto" modes (`.sheet` and
+   * `.navigation`).
+   *
+   * - Parameters:
+   *   - mode: The mode the viewcontroller is presented in
+   *           (e.g. `sheet`, `navigation` or `custom`)
+   * - Returns: A `Bool` `Binding` that can be used w/ an `isActive` parameter
+   *            of a `sheet` or `NavigationLink`.
    */
   @inlinable
   func isPresentingMode(_ mode: ViewControllerPresentationMode)
@@ -133,34 +193,22 @@ public extension _ViewController {
       }
     )
   }
-
-  /**
-   * Lookup a presented ``ViewController`` of a particular type. Returns nil
-   * if there is none such (or the mode doesn't match)
-   *
-   * E.g. this is used by the SheetPresentation.
-   */
-  @inlinable
-  func presentedViewController<VC>(of type: VC.Type,
-                                   mode: ViewControllerPresentationMode?)
-       -> VC?
-    where VC: ViewController
-  {
-    guard let presentation = activePresentation(for: mode) else { return nil }
-    if let mode = mode, mode != presentation.mode    { return nil }
-    return presentation.viewController as? VC
-  }
-  
   
   /**
-   * This allows us to check whether a particular type of VC is being presented,
-   * e.g. in case the presentation should be done differently (e.g. sheet vs
-   * navigation).
+   * A Binding that represents whether a particular type of ``ViewController``
+   * is being presented.
    *
    * CAREFUL: This only checks the type, there could be multiple presentations
    *          with the same type! (leading to multiple Bindings being true,
    *          and different ContentViews being active, potentially capturing the
    *          wrong environment).
+   *
+   * - Parameters:
+   *   - type: The type of the ViewController to lookup
+   *   - mode: Optionally the mode the viewcontroller is presented in
+   *           (e.g. `sheet`, `navigation` or `custom`)
+   * - Returns: A `Bool` `Binding` that can be used w/ an `isActive` parameter
+   *            of a `sheet` or `NavigationLink`.
    */
   func isPresenting<VC>(_ controllerType: VC.Type,
                         mode: ViewControllerPresentationMode?)
@@ -169,9 +217,10 @@ public extension _ViewController {
   {
     isPresenting(mode: mode) { $0 is VC }
   }
+}
 
-
-  // MARK: - API Methods
+// MARK: - API Methods
+public extension _ViewController {
 
   @inlinable
   func show<VC: ViewController>(_ viewController: VC) {
@@ -208,10 +257,6 @@ public extension _ViewController {
     defaultPresent(viewController, mode: mode)
   }
 
-  /**
-   * Present a ``ViewController`` that doesn't have a
-   * ``ViewController/ContentView`` assigned.
-   */
   @inlinable
   func present<VC: ViewController>(_ viewController: VC)
          where VC.ContentView == DefaultViewControllerView
