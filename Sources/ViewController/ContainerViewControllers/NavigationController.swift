@@ -137,7 +137,19 @@ open class NavigationController<RootVC>: ViewController, _NavigationController
   public let _rootViewController : RootVC
   
   public var rootViewController : _ViewController { _rootViewController }
-
+  
+  public enum NavigationViewStyle: Equatable {
+    case automatic
+    
+    @available(iOS 13.0, tvOS 13.0, watchOS 7.0, *)
+    @available(macOS, unavailable)
+    case stack
+    
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+    case columns
+  }
+  @Published public var navigationViewStyle = NavigationViewStyle.automatic
+  
   public init(rootViewController: RootVC) {
     self._rootViewController = rootViewController
     markAsPresentingViewController()
@@ -161,12 +173,31 @@ open class NavigationController<RootVC>: ViewController, _NavigationController
   
   // MARK: - View
   
-  public var view: some View  {
+  private var _view: some View  {
     NavigationView {
       _rootViewController.view
         .controlled(by: _rootViewController)
         .navigationTitle(_rootViewController.navigationTitle)
     }
+  }
+  public var view: some View  {
+    switch navigationViewStyle {
+      case .automatic :
+        _view
+      case .stack     :
+        #if os(macOS)
+          _view
+        #else
+          _view.navigationViewStyle(.stack)
+        #endif
+      case .columns   :
+        if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+          _view.navigationViewStyle(.columns)
+        }
+        else {
+          _view
+        }
+      }
   }
 }
 

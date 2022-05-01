@@ -39,8 +39,8 @@ extension EmptyView: ViewControllerView {}
           Label("Missing VC View", systemImage: "questionmark.circle")
           Spacer()
           if let viewController = viewController {
-            Text(verbatim: "Class: \(type(of: viewController))")
-            Text(verbatim: "ID: \(ObjectIdentifier(viewController))")
+            Text(verbatim: "Class: \(viewController.typeName)")
+            Text(verbatim: "ID: \(viewController.oidString)")
             Text(verbatim: "\(viewController)")
           }
           else {

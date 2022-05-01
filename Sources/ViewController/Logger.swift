@@ -14,11 +14,20 @@ import os
 
 @usableFromInline
 struct PrintLogger {
-
-  let level : OSLogType = .error // TODO: derive from LOGLEVEL env variable
   
+  static let logLevel : OSLogType = {
+    switch ProcessInfo.processInfo.environment["LOGLEVEL"]?.lowercased() {
+      case "error" : return .error
+      case "debug" : return .debug
+      case "fault" : return .fault
+      case "info"  : return .info
+      default: return OSLogType.default
+    }
+  }()
+  var logLevel : OSLogType { Self.logLevel }
+
   func log(_ level: OSLogType, _ prefix: String, _ message: () -> String) {
-    guard level.rawValue >= self.level.rawValue else { return }
+    guard level.rawValue >= self.logLevel.rawValue else { return }
     print(prefix + message())
   }
   
