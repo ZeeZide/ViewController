@@ -67,7 +67,7 @@ struct ViewControllerInfo: View {
       return "AnyVC: " + addressString
     }
     else {
-      return String(describing: type(of: viewController))
+      return viewController.typeName
     }
   }
   
@@ -112,10 +112,12 @@ struct ViewControllerInfo: View {
           }
           .padding()
           
-          HierarchyView(title: "Parent Hierarchy",
-                        controllers: parentHierarchy)
-          HierarchyView(title: "Presentation Hierarchy",
-                        controllers: presentationHierarchy)
+          HierarchyView(title       : "Parent Hierarchy",
+                        controllers : parentHierarchy,
+                        active      : viewController)
+          HierarchyView(title       : "Presentation Hierarchy",
+                        controllers : presentationHierarchy,
+                        active      : viewController)
           
           Spacer()
         }

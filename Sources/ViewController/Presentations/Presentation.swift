@@ -116,7 +116,7 @@ public extension _ViewController {
         
         guard let presentation = self.activePresentation(for: mode) else {
           // This is fine, could have happened by other means.
-          return logger.debug("Did not find VC to deactivate: \(self)")
+          return logger.debug("Did not find VC to deactivate in: \(self)")
         }
 
         assert(mode != .automatic)
@@ -154,7 +154,14 @@ public extension _ViewController {
     // Only during presentation, we may need to dismiss the other type!
     Binding(
       get: {
-        self.activePresentations.contains(where: { $0.mode == mode })
+        if self.activePresentations.contains(where: { $0.mode == mode }) {
+          logger.debug("Is presenting in mode \(mode): \(self)")
+          return true
+        }
+        else {
+          logger.debug("Not presenting in mode \(mode): \(self)")
+          return false
+        }
       },
       set: { isShowing in
         // We cannot make VCs "appear", that would require a factory.
@@ -178,7 +185,8 @@ public extension _ViewController {
         
         guard let presentation = self.activePresentation(for: mode) else {
           // This is fine, could have happened by other means.
-          return logger.debug("did not find VC to deactivate \(self)?")
+          return logger.debug(
+            "did not find VC for mode \(mode) to deactivate in: \(self)?")
         }
 
         /// If a mode was requested, make sure it is the right one.
@@ -262,6 +270,8 @@ public extension _ViewController {
          where VC.ContentView == DefaultViewControllerView
   {
     // Requires a custom `PushPresentation` or `SheetPresentation`
+    logger.debug(
+      "Presenting(.custom) a VC w/o an explicit ContentView: \(viewController)")
     defaultPresent(viewController, mode: .custom)
   }
 
@@ -298,6 +308,8 @@ public extension _ViewController {
     if VC.ContentView.self == DefaultViewControllerView.self {
       // Requires an explicit ``PushPresentation`` or ``SheetPresentation`` in
       // the associated `View`.
+      logger.debug(
+        "modalPresentationMode(.custom) for custom VC: \(viewController)")
       return .custom
     }
     
