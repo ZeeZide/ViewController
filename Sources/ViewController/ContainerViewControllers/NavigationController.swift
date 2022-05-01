@@ -140,7 +140,11 @@ open class NavigationController<RootVC>: ViewController, _NavigationController
   
   public enum NavigationViewStyle: Equatable {
     case automatic
+    
+    @available(iOS 13.0, tvOS 13.0, watchOS 7.0, *)
+    @available(macOS, unavailable)
     case stack
+    
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     case columns
   }
@@ -181,7 +185,11 @@ open class NavigationController<RootVC>: ViewController, _NavigationController
       case .automatic :
         _view
       case .stack     :
-        _view.navigationViewStyle(.stack)
+        #if os(macOS)
+          _view
+        #else
+          _view.navigationViewStyle(.stack)
+        #endif
       case .columns   :
         if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
           _view.navigationViewStyle(.columns)
