@@ -8,3 +8,5 @@
 
 @_exported import Foundation
 @_exported import SwiftUI
+@_exported import struct   Combine.Published
+@_exported import protocol Combine.ObservableObject
