@@ -7,6 +7,7 @@
 //
 
 import os
+import class Foundation.ProcessInfo
 
 // Print Log Helper, since we apparently can't set the log level of os_log 🤦‍♀️
 
@@ -16,7 +17,8 @@ import os
 struct PrintLogger {
   
   static let logLevel : OSLogType = {
-    switch ProcessInfo.processInfo.environment["LOGLEVEL"]?.lowercased() {
+    let env = ProcessInfo.processInfo.environment
+    switch (env["VIEWCONTROLLER_LOGLEVEL"] ?? env["LOGLEVEL"])?.lowercased() {
       case "error" : return .error
       case "debug" : return .debug
       case "fault" : return .fault
